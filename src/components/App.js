@@ -13,7 +13,7 @@ export class App extends Component {
       users: [],
     };
   }
-  // Component Load Update
+  // Component Load Updates
   componentDidMount() {
     this.setState({ loading: true });
     setTimeout(() => {
