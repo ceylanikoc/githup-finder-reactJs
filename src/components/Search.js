@@ -16,10 +16,14 @@ export class Search extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    this.props.searchUsers(this.state.keyword);
-    this.setState({
-      keyword: "",
-    });
+    if (this.state.keyword === "") {
+      this.props.setAlert("Lütfen bir anahtar kelime giriniz.", "danger");
+    } else {
+      this.props.searchUsers(this.state.keyword);
+      this.setState({
+        keyword: "",
+      });
+    }
   }
   render() {
     return (
@@ -31,7 +35,7 @@ export class Search extends Component {
               value={this.state.keyword}
               onChange={this.onchange}
               className="form-control"
-              placeholder = "Search User..."
+              placeholder="Search User..."
             />
             <div className="input-group-append">
               <button type="submit" className="btn btn-primary">
@@ -40,14 +44,14 @@ export class Search extends Component {
             </div>
           </div>
         </form>
-        {this.props.showClearButton && 
+        {this.props.showClearButton && (
           <button
             onClick={this.props.clearUsers}
             className="btn btn-secondary btn-sm btn-block mt-2"
           >
             Clear Result
           </button>
-        }
+        )}
       </div>
     );
   }

@@ -3,18 +3,21 @@ import Navbar from "./Navbar";
 import Users from "./Users";
 import Search from "./Search";
 import axios from "axios";
+import Alert from "./Alert";
 
 export class App extends Component {
   constructor(props) {
     super(props);
     this.searchUsers = this.searchUsers.bind(this);
     this.clearUsers = this.clearUsers.bind(this);
+    this.setAlert = this.setAlert.bind(this);
     this.state = {
       loading: false,
       users: [],
+      alert: null,
     };
   }
-  // Component Load Updates
+  // Component Loading
   componentDidMount() {
     this.setState({ loading: true });
     setTimeout(() => {
@@ -46,14 +49,27 @@ export class App extends Component {
       users: [],
     });
   }
+
+  setAlert(msg, type) {
+    this.setState({
+      alert: { msg: msg, type: type },
+    });
+    setTimeout(() => {
+      this.setState({
+        alert: null,
+      });
+    }, 3000);
+  }
   render() {
     return (
       <Fragment>
         <Navbar title="Github Finder" icon="fab fa-github" />
+        <Alert alert={this.state.alert} />
         <Search
           searchUsers={this.searchUsers}
           clearUsers={this.clearUsers}
           showClearButton={this.state.users.length > 0}
+          setAlert={this.setAlert}
         />
         <Users users={this.state.users} loading={this.state.loading} />
       </Fragment>
