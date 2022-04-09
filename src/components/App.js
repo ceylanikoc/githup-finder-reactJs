@@ -8,6 +8,7 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.searchUsers = this.searchUsers.bind(this);
+    this.clearUsers = this.clearUsers.bind(this);
     this.state = {
       loading: false,
       users: [],
@@ -39,11 +40,21 @@ export class App extends Component {
         );
     }, 500);
   }
+
+  clearUsers() {
+    this.setState({
+      users: [],
+    });
+  }
   render() {
     return (
       <Fragment>
         <Navbar title="Github Finder" icon="fab fa-github" />
-        <Search searchUsers={this.searchUsers} />
+        <Search
+          searchUsers={this.searchUsers}
+          clearUsers={this.clearUsers}
+          showClearButton={this.state.users.length > 0}
+        />
         <Users users={this.state.users} loading={this.state.loading} />
       </Fragment>
     );

@@ -23,14 +23,15 @@ export class Search extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <div className="container my-3">
+      <div className="container my-3">
+        <form onSubmit={this.onSubmit}>
           <div className="input-group">
             <input
               type="text"
               value={this.state.keyword}
               onChange={this.onchange}
               className="form-control"
+              placeholder = "Search User..."
             />
             <div className="input-group-append">
               <button type="submit" className="btn btn-primary">
@@ -38,8 +39,16 @@ export class Search extends Component {
               </button>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+        {this.props.showClearButton && 
+          <button
+            onClick={this.props.clearUsers}
+            className="btn btn-secondary btn-sm btn-block mt-2"
+          >
+            Clear Result
+          </button>
+        }
+      </div>
     );
   }
 }
