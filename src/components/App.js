@@ -18,6 +18,7 @@ export class App extends Component {
     this.setState({ loading: true });
     setTimeout(() => {
       axios.get("https://api.github.com/users").then((res) =>
+        console.log(res);
         this.setState({
           users: res.data,
           loading: false,
