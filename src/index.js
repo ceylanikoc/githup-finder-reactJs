@@ -2,4 +2,33 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/main.scss";
 import App from "./components/App";
-ReactDOM.render(<App />, document.getElementById("root"));
+import { BrowserRouter,Route,Switch } from "react-router-dom";
+
+const HomePage = () => (
+    <div>Home Page</div>
+);
+
+const ContactPage = () => (
+    <div>Contact Page</div>
+);
+
+const ProductPage = () => (
+    <div>Product Page</div>
+);
+
+const NotFound = () => (
+    <div>404 Page</div>
+);
+
+const routes = (
+    <BrowserRouter>
+        <Switch>
+            <Route exact path="/" component = { HomePage} />
+            <Route path="/contact" component = { ContactPage} />
+            <Route path="/products" component = { ProductPage} />
+            <Route  exact component = { NotFound } />
+        </Switch>
+    </BrowserRouter>
+)
+
+ReactDOM.render(routes, document.getElementById("root"));
