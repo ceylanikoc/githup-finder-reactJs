@@ -4,6 +4,8 @@ import Users from "./Users";
 import Search from "./Search";
 import axios from "axios";
 import Alert from "./Alert";
+import About from './About'
+import { BrowserRouter,Route,Switch,Link,NavLink } from "react-router-dom";
 
 export class App extends Component {
   constructor(props) {
@@ -62,17 +64,26 @@ export class App extends Component {
   }
   render() {
     return (
-      <Fragment>
+      <BrowserRouter>
         <Navbar title="Github Finder" icon="fab fa-github" />
         <Alert alert={this.state.alert} />
-        <Search
-          searchUsers={this.searchUsers}
-          clearUsers={this.clearUsers}
-          showClearButton={this.state.users.length > 0}
-          setAlert={this.setAlert}
-        />
-        <Users users={this.state.users} loading={this.state.loading} />
-      </Fragment>
+        <Switch>
+            <Route exact path="/" render={
+                props => (
+                    <>
+                    <Search
+                    searchUsers={this.searchUsers}
+                    clearUsers={this.clearUsers}
+                    showClearButton={this.state.users.length > 0}
+                    setAlert={this.setAlert}
+                    />
+                    <Users users={this.state.users} loading={this.state.loading} />
+                    </>
+                )
+            } />
+            <Route path="/about" component= { About }/>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

@@ -62,15 +62,15 @@ const NotFound = () => (
 
 const AppRouter = () => (
     <BrowserRouter>
-    <Header />
-    <Nav/>
-    <Switch>
-        <Route exact path="/" component = { HomePage} />
-        <Route path="/contact" component = { ContactPage} />
-        <Route exact path="/products" component = { ProductPage} />
-        <Route path="/products/:id" component = { ProductDetailsPage} />
-        <Route  exact component = { NotFound } />
-    </Switch>
+        <Header />
+        <Nav/>
+        <Switch>
+            <Route exact path="/" component = { HomePage} />
+            <Route path="/contact" component = { ContactPage} />
+            <Route exact path="/products" component = { ProductPage} />
+            <Route path="/products/:id" component = { ProductDetailsPage} />
+            <Route  exact component = { NotFound } />
+        </Switch>
     </BrowserRouter>
 )
 
