@@ -5,6 +5,7 @@ import Search from "./Search";
 import axios from "axios";
 import Alert from "./Alert";
 import About from './About'
+import UserDetails from './UserDetails'
 import { BrowserRouter,Route,Switch,Link,NavLink } from "react-router-dom";
 
 export class App extends Component {
@@ -13,9 +14,11 @@ export class App extends Component {
     this.searchUsers = this.searchUsers.bind(this);
     this.clearUsers = this.clearUsers.bind(this);
     this.setAlert = this.setAlert.bind(this);
+    this.getUser = this.getUser.bind(this);
     this.state = {
       loading: false,
       users: [],
+      user: {},
       alert: null,
     };
   }
@@ -30,6 +33,20 @@ export class App extends Component {
         })
       );
     }, 500);
+  }
+
+  getUser(username) {
+        this.setState({
+            loading:true,
+        });
+        setTimeout(() => {
+            axios.get(`https://api.github.com/users/${username}`).then((res) =>
+              this.setState({
+                user: res.data,
+                loading: false,
+              })
+            );
+        }, 500);
   }
 
   searchUsers(keyword) {
@@ -82,6 +99,9 @@ export class App extends Component {
                 )
             } />
             <Route path="/about" component= { About }/>
+            <Route path="/user/:login" render = {props => (
+                <UserDetails {...props} getUser={this.getUser} user={this.state.user} />
+            )}/>
         </Switch>
       </BrowserRouter>
     );
