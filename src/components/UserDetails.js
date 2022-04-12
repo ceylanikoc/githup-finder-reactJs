@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import Loading from './Loading'
+import Repos from './Repos'
 
 class UserDetails extends Component {
   componentDidMount() {
-      this.props.getUser(this.props.match.params.login)
+      this.props.getUser(this.props.match.params.login);
+      this.props.getUserRepos(this.props.match.params.login);
   }
   render() {
-    const {loading} = this.props;
+    const {loading,repos} = this.props;
     const {name,avatar_url,location,html_url,bio,blog,followers,following,public_repos} =this.props.user;
     if(loading) {
         return <Loading />
     }else {
         return (
-            <div className="container mt-3">
+            <div className="container my-3">
                 <div className="row">
                     <div className="col-md-3">
                         <div className="card">
@@ -53,6 +55,9 @@ class UserDetails extends Component {
                                     <span className="badge badge-success m-1">Public Repos : {public_repos} </span>
                                 </div>
                             </div>
+                            <ul className="list-group list-group-flush">
+                                <Repos repos={repos} />
+                            </ul>
                         </div>
                     </div>
                 </div>
