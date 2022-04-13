@@ -4,7 +4,7 @@
 // react 16.8: function component + hook => stateful function component
 
 
-import React, { Component,useState } from 'react'
+import React, { Component,useState,useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 // class App extends Component {
@@ -15,6 +15,13 @@ import ReactDOM from 'react-dom'
 //           text:''
 //       }
 //   }  
+//   componentDidMount() {
+//       console.log('componentDidMount');
+//   }
+
+//   componentDidUpdate() {
+//       console.log('componentdiduptade');
+//   }
 //   render() {
 //     return (
 //       <React.Fragment>
@@ -36,6 +43,38 @@ function App(props) {
     // const obj = useState(10);
     const [count,setCount] = useState(props.count);
     const [text,setText] = useState(props.text);
+
+    // text [] depency text yazdığımızdan dolayı sadece text durum değişikliklerinde çalışacak useEffect text propertysine bağladık.
+    useEffect(() => {
+        console.log("text");
+    },[text])
+
+     // count [] depency count yazdığımızdan dolayı sadece count durum değişikliklerinde çalışacak useEffect count propertysine bağladık.
+     useEffect(() => {
+        console.log("count");
+    },[count])
+
+    // componentDidMount() i [] depency belirttik.
+    useEffect(() => {
+        console.log("componentDidMount");
+    },[])
+
+    // bu kullanımıda hem componentDidMount ve componentDidUpdate gibi çalışıyor. componendDidMount() and componentDidUpdate()  depency belirtmediğimizde.
+    useEffect(() => {
+        console.log('useEffect componentDidMount componentDidUpdate');
+    })
+
+    useEffect(() => {
+        localStorage.setItem('count',count);
+    },[count])
+
+    useEffect(() => {
+        const countData = localStorage.getItem('count');
+        if(countData) {
+            setCount(Number(countData));
+        }
+    },[])
+
     return (
         <>
         <div>Function Component</div>
