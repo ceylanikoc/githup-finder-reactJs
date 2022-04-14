@@ -1,6 +1,6 @@
 const path = require("path");
 module.exports = {
-  entry: "./src/examples/state-hook.js",
+  entry: "./src/examples/note-app.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
