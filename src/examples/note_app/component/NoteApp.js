@@ -3,11 +3,11 @@ import notesReducer from '../reducers/notes'
 import NoteList from './NoteList'
 import AddNoteForm from './AddNoteForm'
 import NotesContext from '../context/notes-context'
-
 const NoteApp = () => {
+   
     //const[notes,setNotes] = useState([])
     const [notes,dispatch] = useReducer(notesReducer,[])
-   
+    console.log(notes);
 
     useEffect(() => {
         const notesData = JSON.parse(localStorage.getItem('notes'))
@@ -19,8 +19,6 @@ const NoteApp = () => {
     useEffect(() => {
         localStorage.setItem('notes',JSON.stringify(notes))
     },[notes])
-
-
 
     return (
         <NotesContext.Provider value={{notes,dispatch}}>
