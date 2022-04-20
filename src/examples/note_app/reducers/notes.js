@@ -1,4 +1,4 @@
-const notesReducer = (state = notes ,action) => {
+const notesReducer = (state ,action) => {
     switch(action.type) {
         case 'POPULATE_NOTES' :
             return action.notes
