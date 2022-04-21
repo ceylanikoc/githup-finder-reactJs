@@ -11,33 +11,11 @@ import Githubstate from '../context/githubState'
 
 const App = () => {
   
-  const [users,setUsers] = useState([])  
-  const [user,setUser] = useState({})  
   const [loading,setLoading] = useState(false)  
   const [alert,setAlert] = useState(null)  
   const [repos,setRepos] = useState([])
   
-  // Component Loading
-  useEffect(() => {
-    setLoading(true)
-    setTimeout(() => {
-        axios.get("https://api.github.com/users").then((res) => {
-          setUsers(res.data)
-          setLoading(false)
-      });
-      }, 500);
-  },[])
-
-  const getUser= (username) => {
-        setLoading(true)
-        setTimeout(() => {
-            axios.get(`https://api.github.com/users/${username}`).then((res) => 
-            {
-                setUser(res.data)
-                setLoading(false)
-            });
-        }, 1000);
-  }
+ 
 
   const getUserRepos = (username) => {
     setLoading(true)
@@ -49,11 +27,6 @@ const App = () => {
     }, 1000);
 }
 
-  
-
-  const clearUsers = () => {
-    setUsers([])
-  }
 
   const showAlert = (msg, type) => {
     setAlert({msg,type})
@@ -72,8 +45,6 @@ const App = () => {
                 props => (
                     <>
                     <Search
-                    clearUsers={clearUsers}
-                    showClearButton={users.length > 0}
                     setAlert={showAlert}
                     />
                     <Users />
@@ -84,11 +55,8 @@ const App = () => {
             <Route path="/user/:login" render = {props => (
                 <UserDetails 
                 {...props} 
-                getUser={getUser} 
                 getUserRepos={getUserRepos}
-                user={user} 
                 repos = {repos}
-                loading={loading}
                 />
             )}/>
         </Switch>
