@@ -1,9 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import Users from "./Users";
 import Search from "./Search";
 import Alert from "./Alert";
-import About from './About'
+import About from './About';
+import NotFound from './NotFound'
 import UserDetails from './UserDetails'
 import { BrowserRouter,Route,Switch,Link,NavLink } from "react-router-dom";
 import Githubstate from '../context/github/githubState'
@@ -32,6 +33,7 @@ const App = () => {
                         {...props} 
                         />
                     )}/>
+                    <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>
         </Alertstate> 
