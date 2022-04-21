@@ -3,8 +3,8 @@ import GithubContext from '../context/githubContext'
 import Loading from './Loading'
 import Repos from './Repos'
 
-const UserDetails = ({getUserRepos,match,repos}) => {
-    const {getUser,loading,user} = useContext(GithubContext)
+const UserDetails = ({match}) => {
+    const {getUser,loading,user,getUserRepos,repos} = useContext(GithubContext)
 
     useEffect(() => {
         getUser(match.params.login);
@@ -59,7 +59,7 @@ const UserDetails = ({getUserRepos,match,repos}) => {
                             </div>
                         </div>
                         <ul className="list-group list-group-flush">
-                            <Repos repos={repos} />
+                            <Repos repos={repos}/>
                         </ul>
                     </div>
                 </div>

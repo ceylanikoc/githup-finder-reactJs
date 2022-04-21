@@ -63,6 +63,18 @@ const Githubstate = (props) => {
         }, 1000);
     }
 
+    const getUserRepos = (username) => {
+        setLoading()
+        setTimeout(() => {
+            axios.get(`https://api.github.com/users/${username}/repos`).then((res) => {
+                    dispatch({
+                        type: "GET_USER_REPOS",
+                        payload:res.data
+                    })
+                });
+        }, 1000);
+    }
+
     return <GithubContext.Provider
                 value= {{
                     users:state.users,
@@ -71,7 +83,8 @@ const Githubstate = (props) => {
                     loading:state.loading,
                     searchUsers,
                     clearUsers,
-                    getUser
+                    getUser,
+                    getUserRepos
                 }}>
                     {props.children}
             </GithubContext.Provider>

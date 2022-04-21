@@ -11,26 +11,12 @@ import Githubstate from '../context/githubState'
 
 const App = () => {
   
-  const [loading,setLoading] = useState(false)  
   const [alert,setAlert] = useState(null)  
   const [repos,setRepos] = useState([])
   
- 
-
-  const getUserRepos = (username) => {
-    setLoading(true)
-    setTimeout(() => {
-        axios.get(`https://api.github.com/users/${username}/repos`).then((res) => {
-                setRepos(res.data)
-                setLoading(false)
-            });
-    }, 1000);
-}
-
 
   const showAlert = (msg, type) => {
     setAlert({msg,type})
-
     setTimeout(() => {
         setAlert({ alert: null })
     }, 3000);
@@ -55,8 +41,6 @@ const App = () => {
             <Route path="/user/:login" render = {props => (
                 <UserDetails 
                 {...props} 
-                getUserRepos={getUserRepos}
-                repos = {repos}
                 />
             )}/>
         </Switch>
