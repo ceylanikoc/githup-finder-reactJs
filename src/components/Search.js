@@ -1,20 +1,25 @@
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
+import GithubContext from '../context/githubContext'
 
-const Search = ({searchUsers,setAlert,showClearButton,clearUsers}) => {
+const Search = ({setAlert,showClearButton,clearUsers}) => {
+
+  const githubContext = useContext(GithubContext)
+  
   const [keyword,setKeyword] = useState('');
-
   const onchange = (e) => {
     setKeyword(e.target.value);
   }
+  
   const onSubmit = (e) => {
     e.preventDefault();
-    if (keyword === "") {
-    setAlert("Lütfen bir anahtar kelime giriniz.", "danger");
+
+    if(keyword === '') {
+        setAlert('lütfen bir anahtar kelime giriniz.','danger');
     } else {
-      searchUsers(keyword);
-      setKeyword('');
-    }
-  }
+        githubContext.searchUsers(keyword);
+        setKeyword('');
+    }      
+ }
   return (
     <div className="container my-3">
       <form onSubmit={onSubmit}>
