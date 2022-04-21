@@ -23,14 +23,16 @@ export class Navbar extends Component {
   }
 }
 
+Navbar.propTypes = {
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+  }
+
 Navbar.defaultProps = {
   title: "Github",
   icon: "fab fa-github",
-};
+}
 
-Navbar.PropTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-};
+
 
 export default Navbar;
