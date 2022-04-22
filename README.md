@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 # githup-finder-react
-=======
-# githup-finder-react
+
 
 Github user search, display of user detail information.
 
@@ -24,7 +22,4 @@ webpack --mode development
 
 ### `npm run webpack-build`
 
-
 webpack --mode development
-
->>>>>>> 36d43f00c0ca42cef52a40a5007466d7bd9346e5
